@@ -6,6 +6,7 @@ import Select from 'react-select';
 import { useNavigate } from 'react-router-dom';
 import { yupResolver } from "@hookform/resolvers/yup";
 
+
 interface Form {
     name: string;
     age: number;
@@ -18,6 +19,18 @@ interface Form {
     fileinput:React.RefObject<HTMLInputElement>;
     country: string;
 }
+
+// const CountriesAutoComplete = () => {
+//   const countries = useAppSelector((store) => store.countries);
+
+//   return (
+//     <datalist id="countries">
+//       {countries.map((el, i) => {
+//         return <option key={i} value={el} />;
+//       })}
+//     </datalist>
+//   );
+// };
 
 const options = [
     { value: 'germany', label: 'Germany' },
@@ -113,6 +126,21 @@ const FormHook = () => {
                     </label>
                     <p className={styles.errors}>{errors?.fileinput?.message}</p>
                 </div>
+                {/* <div className={styles.inputBlock}>
+                     <label className={styles.label} htmlFor="country">
+                     Country
+                    </label>
+                    <div>
+                        <input
+                            className={styles.textInput}
+                            {...register('country')}
+                            list="countries"
+                            name="country"
+                            id="country"
+                         />
+                    <CountriesAutoComplete />
+                     </div>
+                </div> */}
                 <div>
                     <Select
                         className={styles.select}

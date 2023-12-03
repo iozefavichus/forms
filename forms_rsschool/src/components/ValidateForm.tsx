@@ -28,6 +28,7 @@ interface IValidateFromProps {
   country: string | undefined;
 }
 
+
 const validateName = (text: string | undefined) => {
   if (!text) return 'Name is a required field';
   if (
@@ -78,7 +79,8 @@ const validateCountry = (selectValue: string | undefined) => {
 
 const validateFile = (files: FileList | undefined | null) => {
   if (!files || files.length === 0) return 'Must pick file';
-  if (!files[0].type.startsWith('image')) return 'Must pick image';
+  if (!((files[0].type == 'image/jpg')||(files[0].type == 'image/png')||(files[0].type == 'image/jpeg'))) return 'The file should be image(png,jpg,jpeg)';
+  if (files[0].size > 102400) return 'The file should be less than 100Kb'
   return '';
 };
 

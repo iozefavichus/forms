@@ -11,6 +11,10 @@ import AcceptTC from "./acceptTC";
 import FileInput from "./fileInput";
 import Country from "./country";
 import validateForm from './ValidateForm';
+import { convertImage } from './convertImage';
+import { useAppDispatch, useAppSelector } from '../store/store';
+import { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { IFormCard } from './FormData';
 
@@ -43,6 +47,7 @@ const INITIAL_STATE = {
   };
 
   export default class Form extends React.Component<IFormPageProps, IFormPageState> {
+
     nameRef = React.createRef<HTMLInputElement>();
     ageRef = React.createRef<HTMLInputElement>();
     emailRef = React.createRef<HTMLInputElement>();
@@ -77,6 +82,7 @@ const INITIAL_STATE = {
         };
         const validateResults = validateForm(validationData);
         this.setState(validateResults.errorMsgs);
+        console.log(validateResults.valid);
         if (validateResults.valid) {
             const cardData = {
                 name: validationData.name!,
@@ -88,6 +94,8 @@ const INITIAL_STATE = {
                 files: validationData.files!,
                 country: validationData.country!,
              };
+
+            console.log(cardData);
             const { addCard } = this.props;
             addCard(cardData);
             this.formRef.current?.reset();

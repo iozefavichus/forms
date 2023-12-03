@@ -7,6 +7,8 @@ export interface IFormCard {
   password: string;
   gender: string;
   country: string;
+  // imgURL: string;
+  id?: number;
 }
 
 export default class FormCard extends React.Component<IFormCard> {
@@ -14,6 +16,7 @@ export default class FormCard extends React.Component<IFormCard> {
     const { name, age, email, password, gender, country } = this.props;
     return (
       <div className="card">
+        {/* <img className="card-img" src={imgURL} alt="" /> */}
         <p className="card-name">{name}</p>
         <p className="card-general">{age}</p>
         <p className="card-general">{email}</p>
