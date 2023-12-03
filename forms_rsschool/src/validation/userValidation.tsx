@@ -38,9 +38,9 @@ const userSchema = yup
         .oneOf([true],"This field must be checked"),
     fileinput: yup
         .mixed()
-        .required("Required")
-        .test("is-valid-type", "Not a valid image type",
-            value => isValidFileType(value && value.name.toLowerCase(), "image")),
+        .required("Required"),
+        // .test("is-valid-type", "Not a valid image type",
+        //     value => isValidFileType(value && value.name.toLowerCase(), "image")),
         // .test("is-valid-size", "Max allowed size is 100KB",
         //     value => value && value.size <= MAX_FILE_SIZE),
     country: yup

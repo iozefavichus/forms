@@ -4,14 +4,14 @@ import ErrorMessageWrapper from './ErrorMessage';
 interface IGenderPickerProps {
   maleRef: React.RefObject<HTMLInputElement>;
   femaleRef: React.RefObject<HTMLInputElement>;
-  switchErrMsg?: string;
+  genderErrMsg?: string;
 }
 
 export default class Gender extends React.Component<IGenderPickerProps> {
   render() {
-    const { switchErrMsg, maleRef, femaleRef } = this.props;
+    const { genderErrMsg, maleRef, femaleRef } = this.props;
     return (
-      <ErrorMessageWrapper message={switchErrMsg}>
+      <ErrorMessageWrapper message={genderErrMsg}>
         <fieldset className="switch-field">
           <legend>Select gender:</legend>
           <input type="radio" id="radio-one" name="switcher" value="male" ref={maleRef} />

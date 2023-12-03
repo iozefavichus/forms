@@ -4,7 +4,16 @@ const INITIAL_STATE = {
   emailErrMsg: '3',
   passErrMsg: '4',
   passRepeatErrMsg: '5',
+  genderErrMsg: '6',
+  acceptErrMsg: '7',
+  fileErrMsg: '',
+  countryErrMsg: '9',
 };
+
+const REG_EX = {
+  email:/^((([0-9A-Za-z]{1}[-0-9A-z\.]{0,30}[0-9A-Za-z]?)|([0-9А-Яа-я]{1}[-0-9А-я\.]{0,30}[0-9А-Яа-я]?))@([-A-Za-z]{1,}\.){1,}[-A-Za-z]{2,})$/,
+  password: /(?=.*[0-9])(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z])/,
+}
 
 interface IValidateFromProps {
   name: string | undefined;
@@ -12,6 +21,11 @@ interface IValidateFromProps {
   email: string | undefined;
   password: string | undefined;
   passwordRepeat: string | undefined;
+  male: boolean | undefined;
+  female: boolean | undefined;
+  accept: boolean | undefined;
+  files: FileList | undefined | null;
+  country: string | undefined;
 }
 
 const validateName = (text: string | undefined) => {
@@ -31,42 +45,42 @@ const validateAge = (age: number | undefined) => {
 
 const validateEmail = (email: string | undefined) => {
     if (!email) return 'Email is required field';
-    if (email) return 'Email should be like xxx@xxx.xxx';
+    if (!REG_EX.email.test(email)) return 'Email should be like xxx@xxx.xxx';
     return '';
   };
 
 const validatePass = (password: string | undefined) => {
     if (!password) return 'Password is required field';
-    if (password) return 'Email should be like xxx@xxx.xxx';
+    if (!REG_EX.password.test(password)) return 'Password should contains: 1 number, 1 uppercased letter, 1 lowercased letter, 1 special character';
     return '';
   };
 
-const validatePassRepeat = (password: string | undefined) => {
+const validatePassRepeat = (password: string | undefined, mainpassword: string | undefined) => {
     if (!password) return 'Repeat password is required field';
-    if (password) return 'Email should be like xxx@xxx.xxx';
+    if (!(password == mainpassword)) return 'Passwords do not match'
     return '';
   };
 
-// const validateGenderPick = (male: boolean | undefined, female: boolean | undefined) => {
-//   if (male === female) return 'Must pick one';
-//   return '';
-// };
+const validateGender = (male: boolean | undefined, female: boolean | undefined) => {
+  if (male === female) return 'Gender should be selected ';
+  return '';
+};
 
-// const validateConsent = (checkbox: boolean | undefined) => {
-//   if (!checkbox) return 'Must agree';
-//   return '';
-// };
+const validateAccept = (checkbox: boolean | undefined) => {
+  if (!checkbox) return 'Checkbox should be checked';
+  return '';
+};
 
-// const validateSelect = (selectValue: string | undefined) => {
-//   if (!selectValue) return 'Must select';
-//   return '';
-// };
+const validateCountry = (selectValue: string | undefined) => {
+  if (!selectValue) return 'Country should be selected';
+  return '';
+};
 
-// const validateFile = (files: FileList | undefined | null) => {
-//   if (!files || files.length === 0) return 'Must pick file';
-//   if (!files[0].type.startsWith('image')) return 'Must pick image';
-//   return '';
-// };
+const validateFile = (files: FileList | undefined | null) => {
+  if (!files || files.length === 0) return 'Must pick file';
+  if (!files[0].type.startsWith('image')) return 'Must pick image';
+  return '';
+};
 
 const validateForm = (validateData: IValidateFromProps) => {
   const errorMsgs = {
@@ -75,14 +89,22 @@ const validateForm = (validateData: IValidateFromProps) => {
     ageErrMsg: validateAge(validateData.age),
     emailErrMsg: validateEmail(validateData.email),
     passErrMsg: validatePass(validateData.password),
-    passRepeatErrMsg: validatePassRepeat(validateData.passwordRepeat),
+    passRepeatErrMsg: validatePassRepeat(validateData.passwordRepeat, validateData.password),
+    genderErrMsg: validateGender(validateData.male, validateData.female),
+    acceptErrMsg: validateAccept(validateData.accept),
+    fileErrMsg: validateFile(validateData.files),
+    countryErrMsg: validateCountry(validateData.country),
   };
   const valid =
     !errorMsgs.nameErrMsg &&
     !errorMsgs.ageErrMsg &&
     !errorMsgs.emailErrMsg &&
     !errorMsgs.passErrMsg &&
-    !errorMsgs.passRepeatErrMsg
+    !errorMsgs.passRepeatErrMsg &&
+    !errorMsgs.genderErrMsg &&
+    !errorMsgs.acceptErrMsg &&
+    !errorMsgs.fileErrMsg &&
+    !errorMsgs.countryErrMsg
   return { valid, errorMsgs };
 };
 

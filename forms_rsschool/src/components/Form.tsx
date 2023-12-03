@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/form.nodule.css';
+// import styles from '../styles/form.nodule.css';
 
 import Name from "./name";
 import Age from "./age";
@@ -48,10 +48,11 @@ const INITIAL_STATE = {
     emailRef = React.createRef<HTMLInputElement>();
     passRef = React.createRef<HTMLInputElement>();
     passRepeatRef = React.createRef<HTMLInputElement>();
-    genderRef = React.createRef<HTMLInputElement>();
+    switchMaleRef = React.createRef<HTMLInputElement>();
+    switchFemaleRef = React.createRef<HTMLInputElement>();
     acceptRef = React.createRef<HTMLInputElement>();
     fileRef = React.createRef<HTMLInputElement>();
-    countryRef = React.createRef<HTMLInputElement>();
+    countryRef = React.createRef<HTMLSelectElement>();
     formRef = React.createRef<HTMLFormElement>();
 
     constructor(props: IFormPageProps) {
@@ -68,9 +69,10 @@ const INITIAL_STATE = {
           email: this.emailRef.current?.value,
           password: this.passRef.current?.value,
           passwordRepeat: this.passRepeatRef.current?.value,
-          gender:this.genderRef.current?.value,
-          accept:this.acceptRef.current?.value,
-          file:this.fileRef.current?.files,
+          male: this.switchMaleRef.current?.checked,
+          female: this.switchFemaleRef.current?.checked,
+          accept: this.acceptRef.current?.value,
+          files:this.fileRef.current?.files,
           country:this.countryRef.current?.value,
         };
         const validateResults = validateForm(validationData);
@@ -82,9 +84,8 @@ const INITIAL_STATE = {
                 email: validationData.email!,
                 password: validationData.password!,
                 passwordRepeat: validationData.passwordRepeat!,
-                gender: validationData.gender!,
-                accept: validationData.accept!,
-                file: validationData.file!,
+                gender: validationData.female ? 'female' : 'male',
+                files: validationData.files!,
                 country: validationData.country!,
              };
             const { addCard } = this.props;
@@ -99,11 +100,11 @@ const INITIAL_STATE = {
           <div className="form-container">
             <form className="form" onSubmit={this.onSubmit} ref={this.formRef}>
               <Name localRef={this.nameRef} message={nameErrMsg} />
-              <Age localRef={this.ageRef} ageErrMsg={ageErrMsg} />
-              <Email localRef={this.emailRef} emailErrMsg={emailErrMsg} />
-              <Password localRef={this.passRef} passErrMsg={passErrMsg}/>
-              <PasswordRepeat localRef={this.passRepeatRef} passRepeatErrMsg={passRepeatErrMsg}/>
-              <Gender localRef={this.genderRef} genderErrMsg={genderErrMsg}/>
+              <Age localRef={this.ageRef} message={ageErrMsg} />
+              <Email localRef={this.emailRef} message={emailErrMsg} />
+              <Password localRef={this.passRef} message={passErrMsg}/>
+              <PasswordRepeat localRef={this.passRepeatRef} message={passRepeatErrMsg}/>
+              <Gender maleRef={this.switchMaleRef} femaleRef={this.switchFemaleRef} genderErrMsg={genderErrMsg}/>
               <AcceptTC localRef={this.acceptRef} acceptErrMsg={acceptErrMsg}/>
               <FileInput localRef={this.fileRef} fileErrMsg={fileErrMsg}/>
               <Country localRef={this.countryRef} countryErrMsg={countryErrMsg}/>
