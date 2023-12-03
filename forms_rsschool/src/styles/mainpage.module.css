@@ -1,0 +1,16 @@
+.links {
+    margin: 15px;
+    border-radius: 5px;
+    border-color: aliceblue;
+    border-style: 2px;
+    background-color: rgb(182, 182, 182);
+    padding: 10px;
+}
+
+.links:hover {
+    color: black;
+}
+
+.container {
+    display: flex;
+}
