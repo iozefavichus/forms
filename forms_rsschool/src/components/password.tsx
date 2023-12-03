@@ -1,12 +1,27 @@
-import styles from '../styles/input.module.css';
+import React from 'react';
+import ErrorMessageWrapper from './ErrorMessage';
 
-const Password = () => {
-    return (
-        <div>
-            Password:
-            <input className={styles.root} />
-        </div>
-    );
-  };
+interface IFullnameProps {
+    localRef: React.RefObject<HTMLInputElement>;
+    message?: string;
+  }
 
-export default Password;
+  export default class Password extends React.Component<IFullnameProps> {
+    render() {
+      const { localRef, message } = this.props;
+      return (
+        <ErrorMessageWrapper message={message}>
+          <label htmlFor="password">
+            Password:{' '}
+            <input
+              type="text"
+              placeholder="Password"
+              ref={localRef}
+              name="password"
+              id="password"
+            />
+          </label>
+        </ErrorMessageWrapper>
+      );
+    }
+  }

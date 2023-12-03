@@ -1,5 +1,11 @@
 import * as yup from 'yup';
 
+// const MAX_FILE_SIZE = 102400; //100KB
+// const validFileExtensions = { image: ['png', 'jpeg'] };
+// function isValidFileType(fileName, fileType) {
+//     return fileName && validFileExtensions[fileType].indexOf(fileName.split('.').pop()) > -1;
+//   }
+
 const userSchema = yup
 .object()
 .shape({
@@ -28,7 +34,15 @@ const userSchema = yup
     male: yup
         .string(),
     accept: yup
-        .boolean(),
+        .bool()
+        .oneOf([true],"This field must be checked"),
+    fileinput: yup
+        .mixed()
+        .required("Required")
+        .test("is-valid-type", "Not a valid image type",
+            value => isValidFileType(value && value.name.toLowerCase(), "image")),
+        // .test("is-valid-size", "Max allowed size is 100KB",
+        //     value => value && value.size <= MAX_FILE_SIZE),
     country: yup
         .string()
         .required("Country is a required field"),

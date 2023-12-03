@@ -19,9 +19,15 @@ input {
     display: flex;
     padding: 0px;
     margin: 0px 0;
+    width: 100%;
 }
 
 .errors {
     color: rgb(177, 45, 45);
     font-size: 12px;
+}
+
+.select {
+    color: black;
+    width: 100%;
 }

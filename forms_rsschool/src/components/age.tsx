@@ -1,12 +1,27 @@
-import styles from '../styles/input.module.css';
+import React from 'react';
+import ErrorMessageWrapper from './ErrorMessage';
 
-const Age = () => {
-    return (
-        <div>
-            Age:
-            <input className={styles.root} />
-        </div>
-    );
-  };
+interface IFullnameProps {
+    localRef: React.RefObject<HTMLInputElement>;
+    message?: string;
+  }
 
-export default Age;
+  export default class Age extends React.Component<IFullnameProps> {
+    render() {
+      const { localRef, message } = this.props;
+      return (
+        <ErrorMessageWrapper message={message}>
+          <label htmlFor="age">
+            Age:{' '}
+            <input
+              type="text"
+              placeholder="Age"
+              ref={localRef}
+              name="age"
+              id="age"
+            />
+          </label>
+        </ErrorMessageWrapper>
+      );
+    }
+  }
