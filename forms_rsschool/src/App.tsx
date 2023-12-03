@@ -6,11 +6,11 @@ import FormHookPage from './pages/FormHookPage';
 
 function App() {
   return (
-    <div className="app-container">
+    <div>
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/form" element={<FormPage />} />
-        <Route path="/form_hook" element={<FormHookPage />} />
+        <Route path="/formhook" element={<FormHookPage />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
     </div>

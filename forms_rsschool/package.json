@@ -12,6 +12,7 @@
     "lint:fix": "eslint --ext .ts,.tsx --fix src"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.3.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@vitest/coverage-istanbul": "^0.34.6",
     "eslint-config-prettier": "^9.0.0",

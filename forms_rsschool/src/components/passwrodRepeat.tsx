@@ -1,12 +1,12 @@
 import styles from '../styles/input.module.css';
 
-const Password = () => {
+const PasswordRepeat = () => {
     return (
         <div>
-            Password:
+            Repeat password:
             <input className={styles.root} />
         </div>
     );
   };
 
-export default Password;
+export default PasswordRepeat;

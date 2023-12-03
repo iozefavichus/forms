@@ -6,7 +6,7 @@ const MainPage = () => {
         <div className={styles.root}>
             Main Page
             <Link to='/form'>Form 1</Link>
-            <Link to='/fromhook'>Form 2</Link>
+            <Link to='/formhook'>Form 2</Link>
         </div>
     );
   };
